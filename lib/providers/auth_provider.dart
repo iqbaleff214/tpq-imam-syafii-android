@@ -22,9 +22,11 @@ class AuthProvider with ChangeNotifier {
   _loadFromPrefs() async {
     await _initPref();
     String? userlogin = _pref.getString('rememberme');
+    String? userFoto = _pref.getString('rememberfoto');
     if (userlogin != null) {
       var decode = jsonDecode(userlogin);
       _user = UserModel.fromJson(decode);
+      _user.foto = userFoto ?? '';
       notifyListeners();
     }
   }

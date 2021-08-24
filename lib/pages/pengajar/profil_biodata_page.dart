@@ -6,16 +6,31 @@ class ProfilBiodataPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     AppBar header() {
       return AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: Text('Biodata', style: blackFontStyle1,),
-        leading: IconButton(icon: Icon(Icons.close, color: Colors.black87,), onPressed: () { Navigator.pop(context); },),
+        title: Text(
+          'Biodata',
+          style: blackFontStyle1,
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.close,
+            color: Colors.black87,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.check, color: Colors.black87,))
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.check,
+                color: Colors.black87,
+              ))
         ],
       );
     }
@@ -26,15 +41,56 @@ class ProfilBiodataPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: secondaryFontStyle.copyWith(fontSize: 13),),
+            Text(
+              label,
+              style: secondaryFontStyle.copyWith(fontSize: 13),
+            ),
             TextFormField(
               style: primaryFontStyle,
               decoration: InputDecoration(
                   hintText: placeholder,
                   hintStyle: blackFontStyle3,
-                  enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: secondaryColor))
-              ),
-            )
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: secondaryColor))),
+            ),
+          ],
+        ),
+      );
+    }
+
+    _selectDate() async {
+      DateTime? picked = await showDatePicker(
+          context: context,
+          initialDate: new DateTime.now(),
+          firstDate: new DateTime(2016),
+          lastDate: new DateTime(2019)
+      );
+      return picked;
+    }
+
+    Widget inputDate(String label, String placeholder) {
+      return Container(
+        margin: EdgeInsets.only(top: defaultMargin),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              style: secondaryFontStyle.copyWith(fontSize: 13),
+            ),
+            TextFormField(
+              onTap: () {
+                FocusScope.of(context).requestFocus(new FocusNode());
+                var val = _selectDate();
+                print(val);
+              },
+              style: primaryFontStyle,
+              decoration: InputDecoration(
+                  hintText: placeholder,
+                  hintStyle: blackFontStyle3,
+                  enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: secondaryColor))),
+            ),
           ],
         ),
       );
@@ -49,6 +105,7 @@ class ProfilBiodataPage extends StatelessWidget {
             input('Nama Lengkap', 'M. Iqbal Effendi'),
             input('Tempat Lahir', 'Martapura'),
             input('Tanggal Lahir', '21/04/2000'),
+            inputDate('Tanggal Lahir', '21/04/2000'),
           ],
         ),
       );

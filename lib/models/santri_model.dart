@@ -1,4 +1,4 @@
-import 'package:tpq1/models/kehadiran_santri_model.dart';
+import 'package:tpq1/models/wali_model.dart';
 
 import '../constant.dart';
 
@@ -8,33 +8,36 @@ class SantriModel {
   late String namaLengkap;
   late String namaPanggilan;
   late String tempatLahir;
-  late String tanggalLahir;
+  late DateTime tanggalLahir;
   late String jenisKelamin;
+  late String alamat;
   String foto = '';
-  List<KehadiranSantriModel> kehadiran = [];
+  List<WaliModel> wali = [];
 
   SantriModel({
     this.id = 0,
-    this.nis = '0A',
-    this.namaLengkap = '0A',
-    this.namaPanggilan = '0A',
-    this.tempatLahir = '0A',
-    this.tanggalLahir = '0A',
-    this.jenisKelamin = '0A',
+    this.nis = '',
+    this.namaLengkap = '',
+    this.namaPanggilan = '',
+    this.tempatLahir = '',
+    required this.tanggalLahir,
+    this.jenisKelamin = '',
+    this.alamat = '',
   });
 
   SantriModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    nis = json['nis'];
-    namaLengkap = json['nama_lengkap'];
-    namaPanggilan = json['nama_panggilan'];
-    tempatLahir = json['tempat_lahir'];
-    tanggalLahir = json['tanggal_lahir'];
-    jenisKelamin = json['jenis_kelamin'];
+    nis = json['nis'] ?? '';
+    namaLengkap = json['nama_lengkap'] ?? '';
+    namaPanggilan = json['nama_panggilan'] ?? namaLengkap;
+    tempatLahir = json['tempat_lahir'] ?? '';
+    tanggalLahir = DateTime.parse(json['tanggal_lahir']);
+    jenisKelamin = json['jenis_kelamin'] ?? '';
+    alamat = json['alamat'] ?? '';
     foto = json['foto'] != null && json['foto'].toString().isNotEmpty
         ? '$baseUrl/storage/' + json['foto'].toString()
         : '';
-    kehadiran = json['kehadiran'].map<KehadiranSantriModel>((hadir) => KehadiranSantriModel.fromJson(hadir)).toList();
+    wali = json['wali'].map<WaliModel>((wali) => WaliModel.fromJson(wali)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -44,10 +47,11 @@ class SantriModel {
       'nama_lengkap': namaLengkap,
       'nama_panggilan': namaPanggilan,
       'tempat_lahir': tempatLahir,
-      'tanggal_lahir': tanggalLahir,
+      'tanggal_lahir': tanggalLahir.toString(),
       'jenis_kelamin': jenisKelamin,
+      'alamat': alamat,
       'foto': foto,
-      'kehadiran': kehadiran.map((e) => e.toJson()).toList()
+      'wali': wali.map((e) => e.toJson()).toList()
     };
   }
 }

@@ -51,7 +51,7 @@ class SantriCard extends StatelessWidget {
               padding: EdgeInsets.only(left: 12),
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: Text(santri.namaLengkap, style: greyFontStyle.copyWith(fontSize: 12),),
+                child: Text(santri.namaLengkap, style: greyFontStyle.copyWith(fontSize: 12), overflow: TextOverflow.ellipsis,),
               ),
             ),
           ],

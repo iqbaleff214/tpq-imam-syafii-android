@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
           try {
             SharedPreferences prefs = await SharedPreferences.getInstance();
             await prefs.setString('rememberme', jsonEncode(authProvider.user));
-            print(prefs.getString('rememberme'));
+            await prefs.setString('rememberfoto', authProvider.user.foto);
             if (authProvider.user.role == 'Pengajar') {
               await Provider.of<SantriProvider>(context, listen: false).getAllSantri(token: authProvider.user.token);
               Navigator.pushReplacementNamed(context, '/pengajar/main');

@@ -51,7 +51,7 @@ class _ProfilPageState extends State<ProfilPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ClipOval(
-              child: user.pengajar.foto.isEmpty
+              child: user.foto.isEmpty
                   ? Image.asset(
                       user.pengajar.jenisKelamin == 'L' ? 'assets/ikhwan.png' : 'assets/akhwat.png',
                       width: 80,
@@ -59,7 +59,7 @@ class _ProfilPageState extends State<ProfilPage> {
                       fit: BoxFit.cover,
                     )
                   : Image.network(
-                      user.pengajar.foto,
+                      user.foto,
                       width: 80,
                       height: 80,
                       fit: BoxFit.cover,

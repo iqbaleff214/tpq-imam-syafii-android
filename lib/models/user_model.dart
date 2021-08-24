@@ -11,7 +11,7 @@ class UserModel {
   late String token;
   String foto = '';
   PengajarModel pengajar = new PengajarModel();
-  SantriModel santri = new SantriModel();
+  SantriModel santri = new SantriModel(tanggalLahir: DateTime.now());
   KelasModel kelas = new KelasModel(id: 0, nama: 'A3', jenis: 'A3');
 
   UserModel({required this.id, required this.username, required this.email, required this.role, required this.token, required this.foto});
